@@ -1,37 +1,54 @@
-@import "https://unpkg.com/open-props/easings.min.css";
+@import 'https://unpkg.com/open-props/easings.min.css';
+
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&display=swap');
 
 :root {
-    /* spotify colors*/
-    --spotify-green: #1ed760;
-    --spotify-black: #121212;
-    --spotify-white: #ffffff;
-    --spotify-grey: #b3b3b3;
-    --spotify-darkGrey: #222222;
+  /* spotify colors*/
+  --spotify-green: #1ed760;
+  --spotify-black: #121212;
+  --spotify-white: #ffffff;
+  --spotify-grey: #b3b3b3;
+  --spotify-darkGrey: #222222;
+
+  --spotify-textcolor-whitemode: var(--spotify-black);
+  --spotify-textcolor-darkmode: var(--spotify-white);
+  --spotify-backgroundcolor-whitemode: var(--spotify-white);
+  --spotify-backgroundcolor-darkmode: var(--spotify-black);
+  --spotify-cardcolor-whitemode: var(--spotify-grey);
+  --spotify-cardcolor-darkmode: var(--spotify-darkGrey);
 }
 
 /* reset */
 
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-size: 1rem;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-size: 1rem;
 }
 
 img,
 svg {
-    display: block;
-    max-width: 100%;
-    height: auto;
+  display: block;
+  max-width: 100%;
+  height: auto;
 }
 
 /* global page styles */
 
-html {}
+html {
+  font-family: 'Manrope', sans-serif;
+  background-color: var(--spotify-backgroundcolor-darkmode);
+  color: var(--spotify-textcolor-darkmode);
+}
 
 /* center everything */
 
-body {}
+body {
+  display: grid;
+  place-items: center;
+  min-height: 100vh;
+}
 
 /*
     Object: Button reset
@@ -40,40 +57,142 @@ body {}
 */
 
 .button-reset {
-    border: none;
-    margin: 0;
-    padding: 0;
-    width: auto;
-    overflow: visible;
-    background: transparent;
+  border: none;
+  margin: 0;
+  padding: 0;
+  width: auto;
+  overflow: visible;
+  background: transparent;
 
-    /* inherit font & color from ancestor */
-    color: inherit;
-    font: inherit;
+  /* inherit font & color from ancestor */
+  color: inherit;
+  font: inherit;
 
-    /* Normalize `line-height`. Cannot be changed from `normal` in Firefox 4+. */
-    line-height: normal;
+  /* Normalize `line-height`. Cannot be changed from `normal` in Firefox 4+. */
+  line-height: normal;
 
-    /* Corrects font smoothing for webkit */
-    -webkit-font-smoothing: inherit;
-    -moz-osx-font-smoothing: inherit;
+  /* Corrects font smoothing for webkit */
+  -webkit-font-smoothing: inherit;
+  -moz-osx-font-smoothing: inherit;
 
-    /* Corrects inability to style clickable `input` types in iOS */
-    -webkit-appearance: none;
+  /* Corrects inability to style clickable `input` types in iOS */
+  -webkit-appearance: none;
 }
 
 /*
     Toggle button
 */
 
+/* Voeg hier de nodige stijlen toe voor weergave en positie SVG's, en eventueel toggle stijlen */
+.icon--check {
+  display: none;
+}
+
+.icon--add {
+  display: none;
+}
+
+.show-check .icon--check {
+  display: inline-block;
+  fill: var(--spotify-green);
+  animation: fade-in 300ms var(--ease-1);
+  animation: rotate-in 300ms var(--ease-1);
+}
+
+.show-add .icon--add {
+  display: inline-block;
+  animation: fade-in 300ms var(--ease-1);
+  animation: rotate-out 300ms var(--ease-1);
+}
+
+/* Animaties */
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* van add naar check */
+@keyframes rotate-in {
+  from {
+    transform: rotate(45deg); /* Begint op 45 graden */
+  }
+  to {
+    transform: rotate(0deg); /* Eindigt op 0 graden */
+  }
+}
+
+/* van check naar add */
+@keyframes rotate-out {
+  from {
+    transform: rotate(45deg); /* Begint op 0 graden */
+  }
+  to {
+    transform: rotate(90deg); /* Eindigt op 90 graden */
+  }
+}
+
 /*
     Album
 */
+
+.album {
+  max-width: 400px;
+  width: 100%;
+  padding: 1rem;
+  background-color: var(--spotify-cardcolor-darkmode);
+  border-radius: 0.5rem;
+}
+
+.album__img {
+  border-radius: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.album__artist {
+  color: var(--spotify-grey);
+}
+.album__header {
+  display: grid;
+  grid-template-rows: auto auto;
+  grid-template-columns: 1fr 2rem;
+  align-items: start;
+}
+
+.album__title {
+  grid-row: 1;
+  align-self: center;
+}
+
+.album__artist {
+  grid-row: 2;
+  align-self: center;
+}
+
+.album__action {
+  grid-row: span 2;
+  justify-self: end;
+  justify-self: center;
+  align-self: center;
+  margin: 0;
+  padding: 0;
+  /* om beide icons over elkaar te zetten */
+  display: grid;
+  place-items: center;
+}
+
+.toggle__icon {
+  height: 2rem;
+  width: auto;
+}
 
 /*
     Utitlities
 */
 
 .color-grey {
-    color: var(--spotify-grey);
+  color: var(--spotify-grey);
 }
